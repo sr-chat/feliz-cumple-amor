@@ -9,11 +9,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const cakeHint = document.getElementById('cakeHint');
   
   const confettiBtn = document.getElementById('confettiBtn');
-  const couponBtn = document.getElementById('couponBtn');
   const loveBtn = document.getElementById('loveBtn');
   
+  const secretBtn = document.getElementById('secretBtn');
+  const reasonsBtn = document.getElementById('reasonsBtn');
+  const promisesBtn = document.getElementById('promisesBtn');
+  
   const modalBackdrop = document.getElementById('modalBackdrop');
-  const modalCloseBtn = document.getElementById('modalCloseBtn');
+  const modalCardContent = document.getElementById('modalCardContent');
   const musicToggle = document.getElementById('musicToggle');
   const floatingBg = document.getElementById('floatingBg');
   const bgMusic = document.getElementById('bgMusic');
@@ -149,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Botón Te adoro (Lluvia de corazones)
+  // Botón Te adoro (Lluvia de corazones garantizada)
   loveBtn.addEventListener('click', () => {
     const rect = loveBtn.getBoundingClientRect();
     const btnCenterX = rect.left + rect.width / 2;
@@ -177,16 +180,93 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Modal de cupones
-  if (couponBtn) {
-    couponBtn.addEventListener('click', () => {
-      modalBackdrop.classList.remove('hidden');
+  // MODALES INTERACTIVOS (Opciones 1, 2 y 3)
+
+  // 1. Mensajito Secreto
+  secretBtn.addEventListener('click', () => {
+    modalCardContent.innerHTML = `
+      <div class="modal-icon">💌✨</div>
+      <h3>Un deseo para ti mi amor</h3>
+      <div class="modal-desc">
+        Para este nuevo año de vida, solo te deseo cosas buenas. Deseo que cumplas cada meta y sueño que tengas en mente, que nunca pierdas esa forma tan linda que tienes de ser y que siempre te sientas querida y tranquila. Sabes que aquí voy a estar contigo para apoyarte, escucharte y acompañarte en todo. Te mereces ser muy feliz hoy y todos los días de tu vida, mi cielo ❤️
+      </div>
+      <button class="modal-close-btn" id="modalCloseBtn">Guardar en el corazón ❤️</button>
+    `;
+    setupCloseModal();
+    modalBackdrop.classList.remove('hidden');
+  });
+
+  // 2. Razones por las que te quiero (Interactivo)
+  const reasonsList = [
+    "Por cómo me alegras el día con cualquier mensaje tuyo.",
+    "Por tus ocurrencias y por hacerme reír siempre.",
+    "Por ser tan linda y atenta conmigo en todo momento.",
+    "Por la confianza tan bonita que tenemos para hablar de lo que sea.",
+    "Porque simplemente siendo tú, haces que todo sea mucho mejor."
+  ];
+  let currentReasonIdx = 0;
+
+  reasonsBtn.addEventListener('click', () => {
+    currentReasonIdx = 0;
+    renderReasonModal();
+    modalBackdrop.classList.remove('hidden');
+  });
+
+  function renderReasonModal() {
+    modalCardContent.innerHTML = `
+      <div class="modal-icon">⭐💖</div>
+      <h3>Cosas que me encantan de ti</h3>
+      <div class="reason-card">
+        <span class="reason-counter">Razón ${currentReasonIdx + 1} de ${reasonsList.length}</span>
+        <p class="reason-text">"${reasonsList[currentReasonIdx]}"</p>
+      </div>
+      <button class="reason-next-btn" id="nextReasonBtn">Ver otra razón ✨ ➡️</button>
+      <div>
+        <button class="modal-close-btn" id="modalCloseBtn">Cerrar ❤️</button>
+      </div>
+    `;
+
+    document.getElementById('nextReasonBtn').addEventListener('click', () => {
+      currentReasonIdx = (currentReasonIdx + 1) % reasonsList.length;
+      renderReasonModal();
     });
+
+    setupCloseModal();
   }
 
-  modalCloseBtn.addEventListener('click', () => {
-    modalBackdrop.classList.add('hidden');
+  // 3. Mis Promesas
+  promisesBtn.addEventListener('click', () => {
+    modalCardContent.innerHTML = `
+      <div class="modal-icon">📜✨</div>
+      <h3>Mis promesas para ti en tu día</h3>
+      <div class="promise-list">
+        <div class="promise-item">
+          <span class="p-icon">🌸</span>
+          <p><strong>Estar siempre para ti:</strong> Prometo escucharte siempre que lo necesites y ser tu apoyo incondicional en las buenas y en las malas.</p>
+        </div>
+        <div class="promise-item">
+          <span class="p-icon">🤍</span>
+          <p><strong>Cuidar lo que tenemos:</strong> Prometo valorar cada momento juntos y recordarte siempre lo especial e importante que eres para mí.</p>
+        </div>
+        <div class="promise-item">
+          <span class="p-icon">✨</span>
+          <p><strong>Hacerte sonreír:</strong> Prometo dar siempre lo mejor de mí para sacarte una sonrisa, incluso en los días más pesados.</p>
+        </div>
+      </div>
+      <button class="modal-close-btn" id="modalCloseBtn">Prometido mi cielo ❤️</button>
+    `;
+    setupCloseModal();
+    modalBackdrop.classList.remove('hidden');
   });
+
+  function setupCloseModal() {
+    const closeBtn = document.getElementById('modalCloseBtn');
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        modalBackdrop.classList.add('hidden');
+      });
+    }
+  }
 
   modalBackdrop.addEventListener('click', (e) => {
     if (e.target === modalBackdrop) {
