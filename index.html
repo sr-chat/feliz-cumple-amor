@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>¡Feliz Cumpleaños, Emi! 🎉✨</title>
+  
+  <!-- Open Graph Meta Tags (Para vista previa en WhatsApp) -->
+  <meta property="og:title" content="¡Feliz Cumpleaños, mi amor! 🎂❤️">
+  <meta property="og:description" content="Tienes una cartita especial de parte de tu Señor Chat... Toca para abrirla ✨">
+  <meta property="og:type" content="website">
+  <meta name="theme-color" content="#f43f5e">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Outfit:wght@300;400;600;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+
+  <!-- Canvas Confetti CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Fondo de partículas flotantes -->
+  <div class="floating-bg" id="floatingBg"></div>
+
+  <!-- Botón de música ambiental -->
+  <button class="music-toggle" id="musicToggle" aria-label="Reproducir música">
+    <span class="music-icon">🎵</span>
+    <span class="music-text">Música</span>
+  </button>
+
+  <main class="container">
+    <!-- PANTALLA 1: SOBRE / CARTA CERRADA -->
+    <section class="envelope-wrapper" id="envelopeWrapper">
+      <div class="envelope-card" id="envelopeCard">
+        <div class="stamp">🎂</div>
+        <div class="envelope-badge">Para: Emi uwu ✨</div>
+        <div class="envelope-heart-seal" id="openBtn">
+          <span class="heart-pulse">💌</span>
+        </div>
+        <h2 class="envelope-title">Tienes un mensajito especial</h2>
+        <p class="envelope-subtitle">De parte de tu Señor Chat</p>
+        <button class="btn-open" id="openBtnAction">
+          <span>Abrir cartita</span>
+          <span class="sparkle">✨</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- PANTALLA 2: CARTA ABIERTA / CELEBRACIÓN -->
+    <section class="letter-wrapper hidden" id="letterWrapper">
+      <article class="letter-card">
+        <!-- Decoración superior -->
+        <div class="card-header-decor">
+          <span class="decor-tag">20 de Octubre 🎈</span>
+          <span class="decor-sparkles">✨🌸✨</span>
+        </div>
+
+        <!-- Título principal -->
+        <h1 class="letter-title">¡Feliz Cumpleaños, Emi! 🎉❤️</h1>
+        <p class="letter-tagline">Hoy celebramos tu día especial</p>
+
+        <!-- Pastel interactivo -->
+        <div class="cake-container" id="cakeContainer" title="¡Toca para soplar las velitas!">
+          <div class="cake">
+            <div class="plate"></div>
+            <div class="layer layer-bottom"></div>
+            <div class="layer layer-middle"></div>
+            <div class="layer layer-top"></div>
+            <div class="icing"></div>
+            <div class="drip drip1"></div>
+            <div class="drip drip2"></div>
+            <div class="drip drip3"></div>
+            <div class="candle" id="candle">
+              <div class="flame" id="flame"></div>
+            </div>
+          </div>
+          <span class="cake-hint" id="cakeHint">✨ ¡Toca el pastel para soplar la velita! ✨</span>
+        </div>
+
+        <!-- Mensaje de felicitación -->
+        <div class="message-box">
+          <p class="message-text">
+            ¡Feliz cumpleaños, mi amooor! 🎉❤️ Espero que te la pases increíble y que disfrutes mucho tu día. Muchas gracias por ser tú, por estar conmigo y por ser tan linda siempre mi vida. Te mereces todo lo más bonito del mundo y mucho más, de verdad. Ya sabes cuánto te adoro y lo muchísimo que te quiero mi cielo, ¡disfruta mucho tu día! ✨
+          </p>
+        </div>
+
+        <!-- Firma -->
+        <div class="signature-box">
+          <p class="signature-intro">Con todo mi amor,</p>
+          <p class="signature-name">Tu Señor Chat ❤️</p>
+          <span class="signature-badge">uwu</span>
+        </div>
+
+        <!-- Botones interactivos -->
+        <div class="interactive-actions">
+          <button class="action-btn" id="confettiBtn">
+            <span>🎉 Más confeti</span>
+          </button>
+          <button class="action-btn" id="goodnightBtn">
+            <span>🌙 Las buenas noches</span>
+          </button>
+          <button class="action-btn" id="loveBtn">
+            <span>💖 Mandar amorcito</span>
+          </button>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <!-- Modal sorpresa: Las Buenas Noches -->
+  <div class="modal-backdrop hidden" id="modalBackdrop">
+    <div class="modal-card">
+      <div class="modal-icon">🌙✨</div>
+      <h3>El recordatorio obligatorio uwu</h3>
+      <p id="modalMessage">
+        "Por si andas pensando en irte a mimir temprano... recuerda que hoy también te tocan tus buenas noches como se debe. ¡Te adoro mi vida, descansa bonito y sigue siendo muy feli! 🥺❤️"
+      </p>
+      <button class="modal-close-btn" id="modalCloseBtn">Acepto las buenas noches ✨</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

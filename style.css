@@ -1,0 +1,629 @@
+/* ==========================================================================
+   RESET & VARIABLES
+   ========================================================================== */
+:root {
+  --primary: #f43f5e;
+  --primary-light: #fda4af;
+  --primary-dark: #be123c;
+  --secondary: #fb7185;
+  --bg-gradient-start: #ffe4e6;
+  --bg-gradient-end: #fce7f3;
+  --card-bg: rgba(255, 255, 255, 0.92);
+  --text-main: #374151;
+  --text-muted: #6b7280;
+  --accent-gold: #f59e0b;
+  --shadow-soft: 0 10px 30px rgba(244, 63, 94, 0.15);
+  --shadow-strong: 0 20px 45px rgba(244, 63, 94, 0.25);
+  --border-radius: 28px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-end));
+  color: var(--text-main);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ==========================================================================
+   FONDO DE PARTÍCULAS FLOTANTES
+   ========================================================================== */
+.floating-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-item {
+  position: absolute;
+  bottom: -40px;
+  animation: floatUp 8s linear infinite;
+  opacity: 0.6;
+  user-select: none;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(0.6) rotate(0deg);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.7;
+  }
+  80% {
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(-110vh) scale(1.1) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   BOTÓN DE MÚSICA AMBIENTAL
+   ========================================================================== */
+.music-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(253, 164, 175, 0.6);
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(244, 63, 94, 0.12);
+  backdrop-filter: blur(8px);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.music-toggle:hover {
+  transform: scale(1.05);
+  background: #ffffff;
+  box-shadow: 0 6px 20px rgba(244, 63, 94, 0.2);
+}
+
+.music-toggle.playing .music-icon {
+  animation: bounceNote 0.8s ease-in-out infinite alternate;
+}
+
+@keyframes bounceNote {
+  from { transform: scale(1) rotate(-10deg); }
+  to { transform: scale(1.2) rotate(10deg); }
+}
+
+/* ==========================================================================
+   CONTENEDOR PRINCIPAL
+   ========================================================================== */
+.container {
+  width: 100%;
+  max-width: 520px;
+  position: relative;
+  z-index: 10;
+  margin: auto;
+}
+
+/* ==========================================================================
+   PANTALLA 1: EL SOBRE
+   ========================================================================== */
+.envelope-wrapper {
+  perspective: 1000px;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.envelope-wrapper.fade-out {
+  opacity: 0;
+  transform: scale(0.9) translateY(-20px);
+  pointer-events: none;
+}
+
+.envelope-card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 2.8rem 2rem;
+  text-align: center;
+  position: relative;
+  box-shadow: var(--shadow-strong);
+  border: 2px dashed rgba(251, 113, 133, 0.45);
+  backdrop-filter: blur(16px);
+  transition: transform 0.4s ease;
+}
+
+.envelope-card:hover {
+  transform: translateY(-4px);
+}
+
+.stamp {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  font-size: 2rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.envelope-badge {
+  display: inline-block;
+  background: rgba(253, 164, 175, 0.35);
+  color: var(--primary-dark);
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 700;
+  font-size: 0.85rem;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1.5rem;
+}
+
+.envelope-heart-seal {
+  width: 86px;
+  height: 86px;
+  margin: 0 auto 1.5rem;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 10px 25px rgba(244, 63, 94, 0.35);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.envelope-heart-seal:hover {
+  transform: scale(1.12) rotate(6deg);
+}
+
+.heart-pulse {
+  font-size: 2.8rem;
+  animation: pulseBeat 1.4s infinite;
+}
+
+@keyframes pulseBeat {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+.envelope-title {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.4rem;
+}
+
+.envelope-subtitle {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+  margin-bottom: 2rem;
+}
+
+.btn-open {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #ffffff;
+  border: none;
+  padding: 0.95rem 2.2rem;
+  border-radius: 999px;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.3);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.btn-open:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 0 12px 30px rgba(244, 63, 94, 0.42);
+}
+
+/* ==========================================================================
+   PANTALLA 2: CARTA ABIERTA / CELEBRACIÓN
+   ========================================================================== */
+.letter-wrapper {
+  opacity: 1;
+  transform: scale(1);
+  transition: all 0.6s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.letter-wrapper.hidden {
+  display: none;
+  opacity: 0;
+  transform: scale(0.9) translateY(40px);
+}
+
+.letter-card {
+  background: var(--card-bg);
+  border-radius: var(--border-radius);
+  padding: 2.5rem 2rem;
+  box-shadow: var(--shadow-strong);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(20px);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.letter-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #f43f5e, #fb7185, #f59e0b, #fb7185, #f43f5e);
+}
+
+.card-header-decor {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.2rem;
+}
+
+.decor-tag {
+  background: #fff1f2;
+  color: var(--primary);
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid #fecdd3;
+}
+
+.decor-sparkles {
+  font-size: 1.1rem;
+}
+
+.letter-title {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.7rem;
+  color: var(--primary-dark);
+  line-height: 1.15;
+  margin-bottom: 0.25rem;
+  text-shadow: 0 2px 4px rgba(244, 63, 94, 0.1);
+}
+
+.letter-tagline {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  font-weight: 500;
+  margin-bottom: 1.5rem;
+}
+
+/* ==========================================================================
+   PASTEL INTERACTIVO & VELITA
+   ========================================================================== */
+.cake-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 1.2rem auto 1.8rem;
+  cursor: pointer;
+}
+
+.cake {
+  position: relative;
+  width: 140px;
+  height: 110px;
+  margin-bottom: 0.75rem;
+}
+
+.plate {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 150px;
+  height: 14px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.layer {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 10px 10px 6px 6px;
+}
+
+.layer-bottom {
+  bottom: 12px;
+  width: 120px;
+  height: 38px;
+  background: #fb7185;
+  box-shadow: inset 0 -4px rgba(0,0,0,0.06);
+}
+
+.layer-middle {
+  bottom: 46px;
+  width: 95px;
+  height: 30px;
+  background: #fda4af;
+  box-shadow: inset 0 -3px rgba(0,0,0,0.06);
+}
+
+.layer-top {
+  bottom: 72px;
+  width: 70px;
+  height: 22px;
+  background: #fff1f2;
+}
+
+.candle {
+  position: absolute;
+  bottom: 92px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 10px;
+  height: 24px;
+  background: repeating-linear-gradient(45deg, #f43f5e, #f43f5e 4px, #ffffff 4px, #ffffff 8px);
+  border-radius: 4px;
+}
+
+.flame {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 18px;
+  background: #f59e0b;
+  border-radius: 50% 50% 20% 20%;
+  box-shadow: 0 0 12px #f59e0b, 0 0 24px #ef4444;
+  animation: flicker 0.6s infinite alternate;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.flame.blown-out {
+  opacity: 0;
+  transform: translateX(-50%) scale(0.2);
+}
+
+@keyframes flicker {
+  0% { transform: translateX(-50%) rotate(-2deg) scale(1); }
+  100% { transform: translateX(-50%) rotate(3deg) scale(1.12); }
+}
+
+.cake-hint {
+  font-size: 0.8rem;
+  color: var(--primary);
+  font-weight: 600;
+  background: rgba(253, 164, 175, 0.25);
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.85; }
+  50% { opacity: 1; transform: scale(1.03); }
+}
+
+/* ==========================================================================
+   CAJA DE MENSAJE
+   ========================================================================== */
+.message-box {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 1.6rem 1.4rem;
+  margin-bottom: 1.6rem;
+  border: 1px solid #ffe4e6;
+  box-shadow: 0 6px 18px rgba(244, 63, 94, 0.08);
+  position: relative;
+}
+
+.message-box::before {
+  content: "“";
+  position: absolute;
+  top: -12px;
+  left: 20px;
+  font-family: serif;
+  font-size: 3.5rem;
+  color: #fda4af;
+  line-height: 1;
+}
+
+.message-text {
+  font-size: 1.05rem;
+  line-height: 1.65;
+  color: #4b5563;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+/* ==========================================================================
+   FIRMA
+   ========================================================================== */
+.signature-box {
+  margin-bottom: 2rem;
+}
+
+.signature-intro {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.signature-name {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.2rem;
+  color: var(--primary);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.signature-badge {
+  display: inline-block;
+  font-size: 0.8rem;
+  background: #f1f5f9;
+  color: #64748b;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  margin-top: 0.2rem;
+}
+
+/* ==========================================================================
+   BOTONES INTERACTIVOS
+   ========================================================================== */
+.interactive-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  justify-content: center;
+}
+
+.action-btn {
+  background: #ffffff;
+  border: 1px solid #fecdd3;
+  color: var(--primary-dark);
+  font-family: 'Outfit', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 600;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.action-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  background: #fff1f2;
+  border-color: var(--primary-light);
+  box-shadow: 0 6px 16px rgba(244, 63, 94, 0.15);
+}
+
+.action-btn:active {
+  transform: scale(0.97);
+}
+
+/* ==========================================================================
+   MODAL SORPRESA
+   ========================================================================== */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(5px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  transition: opacity 0.3s ease;
+}
+
+.modal-backdrop.hidden {
+  display: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.modal-card {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 2.2rem 1.8rem;
+  max-width: 420px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  animation: modalPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+  from { transform: scale(0.85) translateY(20px); opacity: 0; }
+  to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-icon {
+  font-size: 2.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.modal-card h3 {
+  font-family: 'Quicksand', sans-serif;
+  color: var(--primary-dark);
+  font-size: 1.35rem;
+  margin-bottom: 0.8rem;
+}
+
+.modal-card p {
+  color: #4b5563;
+  font-size: 1rem;
+  line-height: 1.6;
+  margin-bottom: 1.8rem;
+}
+
+.modal-close-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #ffffff;
+  border: none;
+  padding: 0.75rem 1.8rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  box-shadow: 0 6px 18px rgba(244, 63, 94, 0.3);
+  transition: all 0.25s ease;
+}
+
+.modal-close-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 8px 24px rgba(244, 63, 94, 0.4);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN (MÓVILES)
+   ========================================================================== */
+@media (max-width: 480px) {
+  body {
+    padding: 0.85rem;
+  }
+  .envelope-card {
+    padding: 2.2rem 1.4rem;
+  }
+  .letter-card {
+    padding: 2rem 1.25rem;
+  }
+  .letter-title {
+    font-size: 2.3rem;
+  }
+  .message-text {
+    font-size: 0.98rem;
+  }
+  .signature-name {
+    font-size: 1.9rem;
+  }
+}
