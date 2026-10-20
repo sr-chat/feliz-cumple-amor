@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const cakeHint = document.getElementById('cakeHint');
   
   const confettiBtn = document.getElementById('confettiBtn');
-  const goodnightBtn = document.getElementById('goodnightBtn');
+  const couponBtn = document.getElementById('couponBtn');
   const loveBtn = document.getElementById('loveBtn');
   
   const modalBackdrop = document.getElementById('modalBackdrop');
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let candleBlown = false;
 
-  // Fondo animado
+  // Fondo de partículas flotantes
   const particleIcons = ['🌸', '💖', '✨', '🎂', '🎈', '🍰', '💕', '🌷', '⭐️'];
   
   function createFloatingParticle() {
@@ -48,16 +48,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   setInterval(createFloatingParticle, 1200);
 
-  // Reproductor de música
+  // Reproductor de música (volumen suave)
   function startMusic() {
     if (!bgMusic) return;
-    bgMusic.volume = 0.75;
+    bgMusic.volume = 0.22;
     bgMusic.play().then(() => {
       musicToggle.classList.add('playing');
       musicToggle.querySelector('.music-text').textContent = 'Pausar ⏸️';
-    }).catch(() => {
-      // Si el navegador requiere interacción adicional
-    });
+    }).catch(() => {});
   }
 
   function pauseMusic() {
@@ -93,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
   openBtn.addEventListener('click', openLetter);
   openBtnAction.addEventListener('click', openLetter);
 
-  // Efecto confeti
+  // Confeti
   function triggerBigConfetti() {
     if (typeof confetti !== 'function') return;
 
@@ -129,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!candleBlown) {
       flame.classList.add('blown-out');
       candleBlown = true;
-      cakeHint.textContent = '✨ ¡Deseo pedido con éxito! 💖 ✨';
+      cakeHint.textContent = '✨ ¡Deseo pedido mi amor! 💖 ✨';
       cakeHint.style.background = 'rgba(245, 158, 11, 0.2)';
       cakeHint.style.color = '#d97706';
 
@@ -151,37 +149,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Botón Te adoro
+  // Botón Te adoro (Lluvia de corazones)
   loveBtn.addEventListener('click', () => {
     const rect = loveBtn.getBoundingClientRect();
     const btnCenterX = rect.left + rect.width / 2;
     const btnCenterY = rect.top;
 
-    for (let i = 0; i < 8; i++) {
-      const heart = document.createElement('div');
-      heart.textContent = ['💖', '💕', '❤️', '🥰', '✨'][Math.floor(Math.random() * 5)];
-      heart.style.position = 'fixed';
-      heart.style.left = `${btnCenterX + (Math.random() * 80 - 40)}px`;
-      heart.style.top = `${btnCenterY}px`;
-      heart.style.fontSize = `${20 + Math.random() * 14}px`;
-      heart.style.pointerEvents = 'none';
-      heart.style.zIndex = '999';
-      heart.style.transition = 'all 1.2s cubic-bezier(0.25, 1, 0.5, 1)';
+    const heartEmojis = ['💖', '💕', '❤️', '🥰', '✨', '🌹'];
+    for (let i = 0; i < 12; i++) {
+      const heart = document.createElement('span');
+      heart.className = 'heart-burst';
+      heart.textContent = heartEmojis[Math.floor(Math.random() * heartEmojis.length)];
+      
+      const dx = (Math.random() - 0.5) * 180;
+      const dy = -(90 + Math.random() * 120);
+      const rot = (Math.random() - 0.5) * 60;
+      
+      heart.style.left = `${btnCenterX - 14}px`;
+      heart.style.top = `${btnCenterY - 14}px`;
+      heart.style.fontSize = `${24 + Math.random() * 14}px`;
+      heart.style.setProperty('--dx', `${dx}px`);
+      heart.style.setProperty('--dy', `${dy}px`);
+      heart.style.setProperty('--rot', `${rot}deg`);
+      
       document.body.appendChild(heart);
-
-      requestAnimationFrame(() => {
-        heart.style.transform = `translate(${(Math.random() - 0.5) * 130}px, -${110 + Math.random() * 130}px) scale(1.4)`;
-        heart.style.opacity = '0';
-      });
-
-      setTimeout(() => heart.remove(), 1200);
+      setTimeout(() => heart.remove(), 1250);
     }
   });
 
-  // Modal buenas noches
-  goodnightBtn.addEventListener('click', () => {
-    modalBackdrop.classList.remove('hidden');
-  });
+  // Modal de cupones
+  if (couponBtn) {
+    couponBtn.addEventListener('click', () => {
+      modalBackdrop.classList.remove('hidden');
+    });
+  }
 
   modalCloseBtn.addEventListener('click', () => {
     modalBackdrop.classList.add('hidden');
