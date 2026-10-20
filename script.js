@@ -1,5 +1,5 @@
 /* ==========================================================================
-   FELIZ CUMPLEAÑOS EMI - INTERACTIVIDAD
+   FELIZ CUMPLEAÑOS A MI AMOR EMI - INTERACTIVIDAD
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -130,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
       // Apagar velita
       flame.classList.add('blown-out');
       candleBlown = true;
-      cakeHint.textContent = '✨ ¡Deseo pedido con éxito! uwu 💖 ✨';
+      cakeHint.textContent = '✨ ¡Deseo pedido con éxito! 💖 ✨';
       cakeHint.style.background = 'rgba(245, 158, 11, 0.2)';
       cakeHint.style.color = '#d97706';
 
@@ -204,7 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================================================
   // 7. SINTETIZADOR DE MÚSICA AMBIENTAL (Cajita de música con Web Audio API)
   // ==========================================================================
-  // Melodía "Cumpleaños Feliz" en notas y duraciones (frecuencia en Hz, duración en segundos)
   const notes = {
     'C4': 261.63, 'D4': 293.66, 'E4': 329.63, 'F4': 349.23,
     'G4': 392.00, 'A4': 440.00, 'B4': 493.88,
@@ -239,7 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
     osc.type = type;
     osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
 
-    // Envolvente de cajita de música (ataque rápido, caída suave)
     gainNode.gain.setValueAtTime(gainVal, audioCtx.currentTime);
     gainNode.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + duration);
 
@@ -270,9 +268,8 @@ document.addEventListener('DOMContentLoaded', () => {
       const item = melody[noteIdx];
       const freq = notes[item.note] || 440;
       
-      // Sonido estilo campana / cajita de música
       playTone(freq, item.dur * 1.5, 'sine', 0.16);
-      playTone(freq * 2, item.dur * 0.8, 'triangle', 0.04); // armónico
+      playTone(freq * 2, item.dur * 0.8, 'triangle', 0.04);
 
       noteIdx = (noteIdx + 1) % melody.length;
       musicInterval = setTimeout(playNextNote, item.dur * 650);
