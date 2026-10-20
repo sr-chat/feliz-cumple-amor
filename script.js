@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // Botón Te adoro (Lluvia de corazones garantizada)
+  // Botón Te adoro (Lluvia de corazones)
   loveBtn.addEventListener('click', () => {
     const rect = loveBtn.getBoundingClientRect();
     const btnCenterX = rect.left + rect.width / 2;
@@ -180,15 +180,13 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  // MODALES INTERACTIVOS (Opciones 1, 2 y 3)
-
   // 1. Mensajito Secreto
   secretBtn.addEventListener('click', () => {
     modalCardContent.innerHTML = `
       <div class="modal-icon">💌✨</div>
       <h3>Un deseo para ti mi amor</h3>
       <div class="modal-desc">
-        Para este nuevo año de vida, solo te deseo cosas buenas. Deseo que cumplas cada meta y sueño que tengas en mente, que nunca pierdas esa forma tan linda que tienes de ser y que siempre te sientas querida y tranquila. Sabes que aquí voy a estar contigo para apoyarte, escucharte y acompañarte en todo. Te mereces ser muy feliz hoy y todos los días de tu vida, mi cielo ❤️
+        Para este nuevo año de vida, solo te deseo cosas buenas amor. Deseo que cumplas cada meta y sueño que tengas en mente, que nunca pierdas esa forma tan linda de ser y que recuerdes que eres hermosa tal y como eres. Tú ya sabes que estás en mi corazón y en mi mente, y que pase lo que pase, aquí voy a estar contigo siempre. Te mereces ser muy feliz hoy y todos los días de tu vida, mi cielo ❤️
       </div>
       <button class="modal-close-btn" id="modalCloseBtn">Guardar en el corazón ❤️</button>
     `;
@@ -196,13 +194,13 @@ document.addEventListener('DOMContentLoaded', () => {
     modalBackdrop.classList.remove('hidden');
   });
 
-  // 2. Razones por las que te quiero (Interactivo)
+  // 2. Por qué te quiero (Razones reales interactivas)
   const reasonsList = [
-    "Por cómo me alegras el día con cualquier mensaje tuyo.",
-    "Por tus ocurrencias y por hacerme reír siempre.",
-    "Por ser tan linda y atenta conmigo en todo momento.",
-    "Por la confianza tan bonita que tenemos para hablar de lo que sea.",
-    "Porque simplemente siendo tú, haces que todo sea mucho mejor."
+    "Porque simplemente me haces sentir muy bonito cada vez que hablamos.",
+    "Porque me encanta escucharte, saber de ti y ver todas tus ocurrencias.",
+    "Porque me gusta que seas tan atrevida, aventada y linda conmigo.",
+    "Porque me fascina verte en tus fotos y videos, eres hermosa en serio.",
+    "Porque me gusta estar contigo, sentirte cerca y cuidarte."
   ];
   let currentReasonIdx = 0;
 
@@ -241,16 +239,20 @@ document.addEventListener('DOMContentLoaded', () => {
       <h3>Mis promesas para ti en tu día</h3>
       <div class="promise-list">
         <div class="promise-item">
-          <span class="p-icon">🌸</span>
-          <p><strong>Estar siempre para ti:</strong> Prometo escucharte siempre que lo necesites y ser tu apoyo incondicional en las buenas y en las malas.</p>
+          <span class="p-icon">🤍</span>
+          <p><strong>Aquí voy a estar siempre:</strong> Prometo no dejarte sola y estar aquí para ti cada vez que me necesites.</p>
         </div>
         <div class="promise-item">
-          <span class="p-icon">🤍</span>
-          <p><strong>Cuidar lo que tenemos:</strong> Prometo valorar cada momento juntos y recordarte siempre lo especial e importante que eres para mí.</p>
+          <span class="p-icon">🫂</span>
+          <p><strong>Abrazos y besos:</strong> Prometo darte todos los abrazos y besos que quieras.</p>
+        </div>
+        <div class="promise-item">
+          <span class="p-icon">🌸</span>
+          <p><strong>Cuidarte y escucharte:</strong> Prometo escucharte, apoyarte y cuidarte siempre que pueda.</p>
         </div>
         <div class="promise-item">
           <span class="p-icon">✨</span>
-          <p><strong>Hacerte sonreír:</strong> Prometo dar siempre lo mejor de mí para sacarte una sonrisa, incluso en los días más pesados.</p>
+          <p><strong>Arreglar todo hablando:</strong> Prometo nunca cerrarme y siempre hablar las cosas contigo con el corazón.</p>
         </div>
       </div>
       <button class="modal-close-btn" id="modalCloseBtn">Prometido mi cielo ❤️</button>
